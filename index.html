@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="aron-scratch.js"></script>
+<style>
+ canvas{
+ 	margin:20px;
+ }
+</style>
+<body>
+<h2>刮刮卡插件</h2>
+	<canvas id="myCanvas" width="200" height="100" style="border:5px solid red;padding:10px;">
+	Your browser does not support the canvas element.
+	</canvas>
+
+	<canvas id="myCanvas2" width="200" height="100" style="border:5px solid red;padding:0px;">
+	Your browser does not support the canvas element.
+	</canvas>
+
+	<canvas id="myCanvas3" width="200" height="80" style="border:5px solid red;padding:0px;">
+		Your browser does not support the canvas element.
+	</canvas>
+
+	<script type="text/javascript">
+
+	// start demo1
+	var scratch = new Scratch("myCanvas");
+	scratch.init();
+	// end demo1
+
+
+	// start demo2
+	var config2 = {imgUrl : "12.png",surfaceColor : "333", radius:10, autoClear : true, percentage:0.5,FuncScratching : scratching, FuncComplete : complete, shape:"square"};
+	var scratch2 = new Scratch("myCanvas2");
+	scratch2.init(config2);
+	// end demo2
+
+
+	// start demo3
+	function scratching()
+	{
+		console.log("scratched ratio : " + this.offAreaRatio.toFixed(2)*100 + "%");
+	}
+
+	function complete()
+	{
+		console.log("scratch off Complete");
+	}
+
+	var config3 = {surfaceColor : "8E8E8E", radius:10, autoClear : true, percentage:0.5,FuncScratching : scratching, FuncComplete : complete, shape:"circle", texts : [{fillStyle:"#0fa", fillText:"Aron原创",font:"bold 30px Arial",offsetX:10,offsetY:5},{fillStyle:"black", fillText:"谢谢支持!",font:"bold 20px Arial",offsetX:100,offsetY:50}]};
+	var scratch3 = new Scratch("myCanvas3");
+	scratch3.init(config3);
+
+	// end demo3
+</script>
+
+</body>
+</html>
