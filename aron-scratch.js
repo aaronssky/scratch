@@ -130,7 +130,12 @@ Scratch.prototype = {
 	},
 	bindEvent: function() {
 		var that = this;
-		addEventHandler(this.canvas, "mousemove", function(e) {
+		var isPc = isPC();
+
+		var eMove = isPc?"mousemove":"touchmove";
+		var eMoveEnd = isPc?"mouseout":"touchend";
+		addEventHandler(this.canvas, eMove, function(e) {
+			isPc?"":(e.preventDefault(),e.clientX = e.targetTouches[0].clientX,e.clientY = e.targetTouches[0].clientY);
 			var x = e.clientX - that.borderWidth.left - that.offsetCoord.left - that.paddingWidth.left + window.scrollX;
 			var y = e.clientY - that.borderWidth.top - that.offsetCoord.top - that.paddingWidth.top + window.scrollY;
 			that.shape == "circle" ? that.setCircleMode(x, y, that.radius) : that.setSquareMode(x, y, that.radius);
@@ -138,7 +143,7 @@ Scratch.prototype = {
 			that.setOffAreaRatio();
 			that.offAreaRatio < 1 ? that.FuncScratching() : "";
 		});
-		addEventHandler(this.canvas, "mouseout", function(e) {
+		addEventHandler(this.canvas, eMoveEnd, function(e) {
 			that.checkFinish(0.5, function() {
 				that.isCompleted ? "" : that.FuncComplete();
 			});
@@ -222,4 +227,15 @@ function getLeft(e) {
 	var offset = e.offsetLeft;
 	if (e.offsetParent != null) offset += getLeft(e.offsetParent);
 	return offset;
+}
+
+function isPC()
+{
+	var userAgentInfo = navigator.userAgent;
+    var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+    }
+    return flag;
 }

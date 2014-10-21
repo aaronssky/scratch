@@ -8,7 +8,7 @@
  }
 </style>
 <body>
-<h2>刮刮卡插件</h2>
+<h2>刮刮卡插件<span style='color:orange;font-size:16px;'>(支持移动端)</span></h2>
 	<canvas id="myCanvas" width="200" height="100" style="border:5px solid red;padding:10px;">
 	Your browser does not support the canvas element.
 	</canvas>
@@ -45,6 +45,7 @@
 	function complete()
 	{
 		console.log("scratch off Complete");
+		alert("完成");
 	}
 
 	var config3 = {surfaceColor : "8E8E8E", radius:10, autoClear : true, percentage:0.5,FuncScratching : scratching, FuncComplete : complete, shape:"circle", texts : [{fillStyle:"#0fa", fillText:"Aron原创",font:"bold 30px Arial",offsetX:10,offsetY:5},{fillStyle:"black", fillText:"谢谢支持!",font:"bold 20px Arial",offsetX:100,offsetY:50}]};
